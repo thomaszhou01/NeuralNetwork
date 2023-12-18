@@ -1,0 +1,26 @@
+[
+{
+  "directory": "C:/Users/Thomas/Desktop/Programming/NeuralNetwork/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/NeuralNetwork.dir/includes_CXX.rsp -g -std=gnu++14 -o CMakeFiles\\NeuralNetwork.dir\\src\\main.cc.obj -c C:\\Users\\Thomas\\Desktop\\Programming\\NeuralNetwork\\src\\main.cc",
+  "file": "C:/Users/Thomas/Desktop/Programming/NeuralNetwork/src/main.cc",
+  "output": "CMakeFiles/NeuralNetwork.dir/src/main.cc.obj"
+},
+{
+  "directory": "C:/Users/Thomas/Desktop/Programming/NeuralNetwork/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/NeuralNetwork.dir/includes_CXX.rsp -g -std=gnu++14 -o CMakeFiles\\NeuralNetwork.dir\\src\\neural_network.cc.obj -c C:\\Users\\Thomas\\Desktop\\Programming\\NeuralNetwork\\src\\neural_network.cc",
+  "file": "C:/Users/Thomas/Desktop/Programming/NeuralNetwork/src/neural_network.cc",
+  "output": "CMakeFiles/NeuralNetwork.dir/src/neural_network.cc.obj"
+},
+{
+  "directory": "C:/Users/Thomas/Desktop/Programming/NeuralNetwork/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/NeuralNetwork.dir/includes_CXX.rsp -g -std=gnu++14 -o CMakeFiles\\NeuralNetwork.dir\\src\\neuron.cc.obj -c C:\\Users\\Thomas\\Desktop\\Programming\\NeuralNetwork\\src\\neuron.cc",
+  "file": "C:/Users/Thomas/Desktop/Programming/NeuralNetwork/src/neuron.cc",
+  "output": "CMakeFiles/NeuralNetwork.dir/src/neuron.cc.obj"
+},
+{
+  "directory": "C:/Users/Thomas/Desktop/Programming/NeuralNetwork/build",
+  "command": "C:\\msys64\\mingw64\\bin\\g++.exe  @CMakeFiles/NeuralNetwork.dir/includes_CXX.rsp -g -std=gnu++14 -o CMakeFiles\\NeuralNetwork.dir\\src\\layer.cc.obj -c C:\\Users\\Thomas\\Desktop\\Programming\\NeuralNetwork\\src\\layer.cc",
+  "file": "C:/Users/Thomas/Desktop/Programming/NeuralNetwork/src/layer.cc",
+  "output": "CMakeFiles/NeuralNetwork.dir/src/layer.cc.obj"
+}
+]
