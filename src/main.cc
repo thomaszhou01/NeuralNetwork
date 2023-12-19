@@ -7,5 +7,8 @@ int main(){
 
     NeuralNetwork nn{100};
     nn.add_layer(200);
+    nn.add_layer(150);
+    nn.add_layer(100);
+    nn.add_layer(10);
     return 0;
 }
