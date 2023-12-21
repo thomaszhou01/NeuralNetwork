@@ -2,11 +2,12 @@
 #define LAYER_H_
 
 #include <vector>
+#include <cmath>
 #include "neuron.h"
 
 class Layer{
     public:
-        Layer(unsigned int neuron_count, unsigned int input_size);
+        Layer(unsigned int neuron_count, unsigned int input_size, unsigned int activation_function);
 
         unsigned int get_neuron_count();
 
@@ -23,10 +24,9 @@ class Layer{
     private:
         unsigned int input_size_;
         unsigned int neuron_count_;
+        unsigned int activation_function_;
         
         std::vector<Neuron> neurons_;
-
-        void update_gradients(std::vector<float>& inputs);
 
         float activation_function(float input);
 

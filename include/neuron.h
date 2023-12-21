@@ -3,10 +3,12 @@
 
 #include <iostream>
 #include <vector>
+#include <cmath>
+#include <random>
 
 class Neuron {
     public:
-        Neuron(unsigned int input_size);
+        Neuron(unsigned int input_size, unsigned int activation_function);
 
         unsigned int get_input_size();
 
@@ -16,13 +18,13 @@ class Neuron {
 
         float get_weight_value(unsigned int weight);
 
+        void reset_nodeVal();
+
         float propogate(const std::vector<float>& inputs);
 
-        void update_gradient_weight(float gradient);
+        void update_nodeVal(float nodeVal);
 
-        void update_gradient_bias(float gradient);
-
-        void update_weights(unsigned int weight, float inputs, float learning_rate);
+        void update_weights(unsigned int weight, float input, float learning_rate);
 
         void update_bias(float learning_rate);
 
@@ -31,9 +33,9 @@ class Neuron {
         float bias_;
         float weighted_sum_;
         float output_;
+        unsigned int activation_function_;
         //need gradient for weights and biases
-        float gradient_weight_;
-        float gradient_bias_;
+        float nodeVal_;
 
         unsigned int input_size_;
         std::vector<float> weights_;

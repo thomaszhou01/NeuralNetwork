@@ -45,6 +45,22 @@ CMakeFiles/NeuralNetwork.dir/src/neural_network.cc.obj: \
  C:/msys64/mingw64/include/c++/12.2.0/backward/binders.h \
  C:/msys64/mingw64/include/c++/12.2.0/bits/range_access.h \
  C:/msys64/mingw64/include/c++/12.2.0/bits/vector.tcc \
+ C:/msys64/mingw64/include/c++/12.2.0/cmath \
+ C:/msys64/mingw64/include/math.h C:/msys64/mingw64/include/crtdefs.h \
+ C:/msys64/mingw64/include/corecrt.h C:/msys64/mingw64/include/_mingw.h \
+ C:/msys64/mingw64/include/_mingw_mac.h \
+ C:/msys64/mingw64/include/_mingw_secapi.h \
+ C:/msys64/mingw64/include/vadefs.h \
+ C:/msys64/mingw64/include/sdks/_mingw_ddk.h \
+ C:/msys64/mingw64/include/c++/12.2.0/bits/std_abs.h \
+ C:/msys64/mingw64/include/stdlib.h \
+ C:/msys64/mingw64/include/corecrt_wstdlib.h \
+ C:/msys64/mingw64/include/limits.h \
+ C:/msys64/mingw64/include/sec_api/stdlib_s.h \
+ C:/msys64/mingw64/include/c++/12.2.0/stdlib.h \
+ C:/msys64/mingw64/include/malloc.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/mm_malloc.h \
+ C:/msys64/mingw64/include/errno.h \
  C:/Users/Thomas/Desktop/Programming/NeuralNetwork/include/neuron.h \
  C:/msys64/mingw64/include/c++/12.2.0/iostream \
  C:/msys64/mingw64/include/c++/12.2.0/ostream \
@@ -53,14 +69,8 @@ CMakeFiles/NeuralNetwork.dir/src/neural_network.cc.obj: \
  C:/msys64/mingw64/include/c++/12.2.0/bits/stringfwd.h \
  C:/msys64/mingw64/include/c++/12.2.0/bits/postypes.h \
  C:/msys64/mingw64/include/c++/12.2.0/cwchar \
- C:/msys64/mingw64/include/wchar.h C:/msys64/mingw64/include/corecrt.h \
- C:/msys64/mingw64/include/_mingw.h \
- C:/msys64/mingw64/include/_mingw_mac.h \
- C:/msys64/mingw64/include/_mingw_secapi.h \
- C:/msys64/mingw64/include/vadefs.h \
- C:/msys64/mingw64/include/sdks/_mingw_ddk.h \
+ C:/msys64/mingw64/include/wchar.h \
  C:/msys64/mingw64/include/corecrt_stdio_config.h \
- C:/msys64/mingw64/include/corecrt_wstdlib.h \
  C:/msys64/mingw64/include/_mingw_off_t.h \
  C:/msys64/mingw64/include/_mingw_stat64.h \
  C:/msys64/mingw64/include/swprintf.inl \
@@ -69,7 +79,7 @@ CMakeFiles/NeuralNetwork.dir/src/neural_network.cc.obj: \
  C:/msys64/mingw64/include/c++/12.2.0/bits/exception_ptr.h \
  C:/msys64/mingw64/include/c++/12.2.0/bits/cxxabi_init_exception.h \
  C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/stddef.h \
- C:/msys64/mingw64/include/stddef.h C:/msys64/mingw64/include/crtdefs.h \
+ C:/msys64/mingw64/include/stddef.h \
  C:/msys64/mingw64/include/c++/12.2.0/typeinfo \
  C:/msys64/mingw64/include/c++/12.2.0/bits/nested_exception.h \
  C:/msys64/mingw64/include/c++/12.2.0/bits/char_traits.h \
@@ -87,11 +97,11 @@ CMakeFiles/NeuralNetwork.dir/src/neural_network.cc.obj: \
  C:/msys64/mingw64/include/c++/12.2.0/ext/atomicity.h \
  C:/msys64/mingw64/include/c++/12.2.0/x86_64-w64-mingw32/bits/gthr.h \
  C:/msys64/mingw64/include/c++/12.2.0/x86_64-w64-mingw32/bits/gthr-default.h \
- C:/msys64/mingw64/include/pthread.h C:/msys64/mingw64/include/errno.h \
+ C:/msys64/mingw64/include/pthread.h \
  C:/msys64/mingw64/include/sys/types.h \
  C:/msys64/mingw64/include/process.h \
  C:/msys64/mingw64/include/corecrt_startup.h \
- C:/msys64/mingw64/include/limits.h C:/msys64/mingw64/include/signal.h \
+ C:/msys64/mingw64/include/signal.h \
  C:/msys64/mingw64/include/pthread_signal.h \
  C:/msys64/mingw64/include/time.h C:/msys64/mingw64/include/sys/timeb.h \
  C:/msys64/mingw64/include/sec_api/sys/timeb_s.h \
@@ -107,12 +117,6 @@ CMakeFiles/NeuralNetwork.dir/src/neural_network.cc.obj: \
  C:/msys64/mingw64/include/c++/12.2.0/bits/basic_string.h \
  C:/msys64/mingw64/include/c++/12.2.0/ext/string_conversions.h \
  C:/msys64/mingw64/include/c++/12.2.0/cstdlib \
- C:/msys64/mingw64/include/stdlib.h \
- C:/msys64/mingw64/include/sec_api/stdlib_s.h \
- C:/msys64/mingw64/include/c++/12.2.0/stdlib.h \
- C:/msys64/mingw64/include/malloc.h \
- C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/mm_malloc.h \
- C:/msys64/mingw64/include/c++/12.2.0/bits/std_abs.h \
  C:/msys64/mingw64/include/c++/12.2.0/cstdio \
  C:/msys64/mingw64/include/c++/12.2.0/cerrno \
  C:/msys64/mingw64/include/c++/12.2.0/bits/charconv.h \
@@ -134,4 +138,18 @@ CMakeFiles/NeuralNetwork.dir/src/neural_network.cc.obj: \
  C:/msys64/mingw64/include/c++/12.2.0/bits/basic_ios.tcc \
  C:/msys64/mingw64/include/c++/12.2.0/bits/ostream.tcc \
  C:/msys64/mingw64/include/c++/12.2.0/istream \
- C:/msys64/mingw64/include/c++/12.2.0/bits/istream.tcc
+ C:/msys64/mingw64/include/c++/12.2.0/bits/istream.tcc \
+ C:/msys64/mingw64/include/c++/12.2.0/random \
+ C:/msys64/mingw64/include/c++/12.2.0/limits \
+ C:/msys64/mingw64/include/c++/12.2.0/bits/random.h \
+ C:/msys64/mingw64/include/c++/12.2.0/bits/uniform_int_dist.h \
+ C:/msys64/mingw64/include/c++/12.2.0/x86_64-w64-mingw32/bits/opt_random.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/pmmintrin.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/emmintrin.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/xmmintrin.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/mmintrin.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/mwaitintrin.h \
+ C:/msys64/mingw64/include/c++/12.2.0/bits/random.tcc \
+ C:/msys64/mingw64/include/c++/12.2.0/numeric \
+ C:/msys64/mingw64/include/c++/12.2.0/bits/stl_numeric.h \
+ C:/msys64/mingw64/include/c++/12.2.0/bit

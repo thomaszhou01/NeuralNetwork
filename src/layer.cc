@@ -1,10 +1,10 @@
 #include "layer.h"
 
-Layer::Layer(unsigned int neuron_count, unsigned int input_size): input_size_(input_size), neuron_count_(neuron_count){
+Layer::Layer(unsigned int neuron_count, unsigned int input_size, unsigned int activation_function): input_size_(input_size), neuron_count_(neuron_count), activation_function_(activation_function){
     this->neurons_.reserve(neuron_count);
 
     for(int i = 0; i < neuron_count; i++){
-        this->neurons_.push_back(Neuron(input_size));
+        this->neurons_.push_back(Neuron(input_size, activation_function));
     }
 }
 
@@ -31,9 +31,11 @@ std::vector<float> Layer::back_propogate_output(std::vector<float>& inputs){
     for (int i = 0; i < this->neuron_count_; i++){
         float output = this->cost_function_derivative(this->neurons_[i].get_output(), inputs[i]) * this->activation_function_derivative(this->neurons_[i].get_weighted_sum());
         outputs.push_back(output);
+        this->neurons_[i].update_nodeVal(output);
+        // std::cout << "Weighted: " << this->neurons_[i].get_weighted_sum() << " " << this->neurons_[i].get_output() << " " << output << " " << outputs[i] << std::endl;
     }
 
-    this->update_gradients(outputs);
+    // outputs == nodeValues
 
     return outputs;
 }
@@ -50,9 +52,8 @@ std::vector<float> Layer::back_propogate_hidden(Layer &prev_layer, std::vector<f
         }
         output *= this->activation_function_derivative(this->neurons_[i].get_weighted_sum());
         outputs.push_back(output);
+        this->neurons_[i].update_nodeVal(output);
     }
-
-    this->update_gradients(outputs);
 
     return outputs;
 }
@@ -66,6 +67,7 @@ std::vector<float> Layer::gradient_descent(std::vector<float>& inputs, float lea
         }
 
         this->neurons_[i].update_bias(learning_rate);
+        this->neurons_[i].reset_nodeVal();
         outputs.push_back(this->neurons_[i].get_output());
     }
 
@@ -82,30 +84,34 @@ float Layer::get_cost(std::vector<float>& labels){
     return cost;
 }
 
-void Layer::update_gradients(std::vector<float>& inputs){
-    for(int i = 0; i < this->neuron_count_; i++){
-        for(int j = 0; j < this->neurons_[0].get_input_size(); j++){
-            this->neurons_[i].update_gradient_weight(inputs[i] * this->neurons_[i].get_weight_value(j));
-        }
-        this->neurons_[i].update_gradient_bias(inputs[i]);
-    }
-}
-
-
 float Layer::activation_function(float input){
     //ReLU
-    if(input < 0.0f){
-        return 0.0f;
+    if(activation_function_ == 0){
+        if(input < 0.0f){
+            return 0.0f;
+        }
+        return input;
     }
-    return input;
+    else {
+        //Sigmoid
+        return 1.0f / (1.0f + exp(-input));
+    }
 }
 
 float Layer::activation_function_derivative(float input){
-    //ReLU
-    if(input < 0.0f){
-        return 0.0f;
+    if(activation_function_ == 0){
+        //ReLU
+        if(input < 0.0f){
+            return 0.0f;
+        }
+        return 1.0f;
     }
-    return 1.0f;
+    else {
+        //Sigmoid
+        float activation = activation_function(input);
+        return activation * (1.0f - activation);
+    }
+    
 }
 
 float Layer::cost_function(float output, float expected_output){

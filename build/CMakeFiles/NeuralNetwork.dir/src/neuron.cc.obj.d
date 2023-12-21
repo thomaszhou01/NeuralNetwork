@@ -132,4 +132,20 @@ CMakeFiles/NeuralNetwork.dir/src/neuron.cc.obj: \
  C:/msys64/mingw64/include/c++/12.2.0/bits/stl_uninitialized.h \
  C:/msys64/mingw64/include/c++/12.2.0/bits/stl_vector.h \
  C:/msys64/mingw64/include/c++/12.2.0/bits/stl_bvector.h \
- C:/msys64/mingw64/include/c++/12.2.0/bits/vector.tcc
+ C:/msys64/mingw64/include/c++/12.2.0/bits/vector.tcc \
+ C:/msys64/mingw64/include/c++/12.2.0/cmath \
+ C:/msys64/mingw64/include/math.h \
+ C:/msys64/mingw64/include/c++/12.2.0/random \
+ C:/msys64/mingw64/include/c++/12.2.0/limits \
+ C:/msys64/mingw64/include/c++/12.2.0/bits/random.h \
+ C:/msys64/mingw64/include/c++/12.2.0/bits/uniform_int_dist.h \
+ C:/msys64/mingw64/include/c++/12.2.0/x86_64-w64-mingw32/bits/opt_random.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/pmmintrin.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/emmintrin.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/xmmintrin.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/mmintrin.h \
+ C:/msys64/mingw64/lib/gcc/x86_64-w64-mingw32/12.2.0/include/mwaitintrin.h \
+ C:/msys64/mingw64/include/c++/12.2.0/bits/random.tcc \
+ C:/msys64/mingw64/include/c++/12.2.0/numeric \
+ C:/msys64/mingw64/include/c++/12.2.0/bits/stl_numeric.h \
+ C:/msys64/mingw64/include/c++/12.2.0/bit

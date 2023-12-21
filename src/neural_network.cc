@@ -6,14 +6,14 @@ NeuralNetwork::NeuralNetwork(unsigned int input_size_): input_size_(input_size_)
     layer_count_ = 0;
 }
 
-void NeuralNetwork::add_layer(unsigned int neuron_count){
+void NeuralNetwork::add_layer(unsigned int neuron_count, unsigned int activation_function){
     unsigned int prev_layer_size = this->input_size_;
 
     if (this->layer_count_ != 0) {
         prev_layer_size = this->layers_[this->layer_count_ - 1].get_neuron_count();
     }
 
-    this->layers_.push_back(Layer(neuron_count, prev_layer_size));
+    this->layers_.push_back(Layer(neuron_count, prev_layer_size, activation_function));
     this->layer_count_++;
     std::cout << "Layer Added!" << std::endl;
 }  
@@ -30,11 +30,14 @@ void NeuralNetwork::train(std::vector<std::vector<float>>& inputs, std::vector<s
             std::vector<float> outputs = this->propogate(inputs[j]);
             
             float iteration_cost = this->layers_[this->layer_count_-1].get_cost(labels[j]);
-            
+
+            this->back_propogate(outputs, labels[j], learning_rate);
+
             cost += iteration_cost;
         }
-        // Using gradient descent
+
         cost = cost / labels.size();
+        std::cout << "Cost: " << cost << std::endl;
 
     }
 }
@@ -51,7 +54,7 @@ std::vector<float> NeuralNetwork::propogate(std::vector<float>& inputs){
 }
 
 void NeuralNetwork::back_propogate(std::vector<float>& inputs, std::vector<float>& labels, float learning_rate){
-    std::vector<float> outputs = inputs;
+    std::vector<float> outputs = labels;
 
     outputs = this->layers_[this->layer_count_-1].back_propogate_output(outputs);
 
