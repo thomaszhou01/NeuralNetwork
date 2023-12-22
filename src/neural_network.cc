@@ -18,20 +18,21 @@ void NeuralNetwork::add_layer(unsigned int neuron_count, unsigned int activation
     std::cout << "Layer Added!" << std::endl;
 }  
 
-void NeuralNetwork::train(std::vector<std::vector<float>>& inputs, std::vector<std::vector<float>>& labels, unsigned int epochs, float learning_rate){
+void NeuralNetwork::train(std::vector<std::vector<double>>& inputs, std::vector<std::vector<double>>& labels, unsigned int epochs, double learning_rate){
     std::cout << "Training Started" << std::endl;
 
     for(int i = 0; i < epochs; i++){
 
         std::cout << "Epoch: " << i << std::endl;
 
-        float cost = 0.0f;
+        double cost = 0.0f;
         for(int j = 0; j < inputs.size(); j++){
-            std::vector<float> outputs = this->propogate(inputs[j]);
+            std::vector<double> outputs = this->propogate(inputs[j]);
             
-            float iteration_cost = this->layers_[this->layer_count_-1].get_cost(labels[j]);
-
-            this->back_propogate(outputs, labels[j], learning_rate);
+            double iteration_cost = this->layers_[this->layer_count_-1].get_cost(labels[j]);
+            // this->back_propogate(outputs, labels[j], learning_rate);
+            this->back_propogate(labels[j]);
+            this->optimize_weights(inputs[j], learning_rate);
 
             cost += iteration_cost;
         }
@@ -42,9 +43,25 @@ void NeuralNetwork::train(std::vector<std::vector<float>>& inputs, std::vector<s
     }
 }
 
+int NeuralNetwork::predict(std::vector<double>& inputs){
+    std::vector<double> outputs = this->propogate(inputs);
 
-std::vector<float> NeuralNetwork::propogate(std::vector<float>& inputs){
-    std::vector<float> outputs = inputs;
+    int max_index = 0;
+    double max_value = outputs[0];
+
+    for(int i = 1; i < outputs.size(); i++){
+        if(outputs[i] > max_value){
+            max_value = outputs[i];
+            max_index = i;
+        }
+    }
+
+    return max_index;
+}
+
+
+std::vector<double> NeuralNetwork::propogate(std::vector<double>& inputs){
+    std::vector<double> outputs = inputs;
 
     for(int i = 0; i < this->layer_count_; i++){
         outputs = this->layers_[i].propogate(outputs);
@@ -53,16 +70,20 @@ std::vector<float> NeuralNetwork::propogate(std::vector<float>& inputs){
     return outputs;
 }
 
-void NeuralNetwork::back_propogate(std::vector<float>& inputs, std::vector<float>& labels, float learning_rate){
-    std::vector<float> outputs = labels;
+void NeuralNetwork::back_propogate(std::vector<double>& labels){
+    std::vector<double> outputs = labels;
 
     outputs = this->layers_[this->layer_count_-1].back_propogate_output(outputs);
 
     for(int i = this->layer_count_ - 2; i >= 0; i--){
         outputs = this->layers_[i].back_propogate_hidden(this->layers_[i+1], outputs);
     }
+}
 
+void NeuralNetwork::optimize_weights(std::vector<double>& inputs, double learning_rate){
+    std::vector<double> outputs = inputs;
+    
     for(int i = 0; i < this->layer_count_; i++){
-        inputs = this->layers_[i].gradient_descent(inputs, learning_rate);
+        outputs = this->layers_[i].gradient_descent(outputs, learning_rate);
     }
 }

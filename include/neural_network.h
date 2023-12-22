@@ -10,17 +10,20 @@ class NeuralNetwork {
 
         void add_layer(unsigned int neuron_count, unsigned int activation_function);
 
-        void train(std::vector<std::vector<float>>& inputs, std::vector<std::vector<float>>& labels, unsigned int epochs, float learning_rate);
+        void train(std::vector<std::vector<double>>& inputs, std::vector<std::vector<double>>& labels, unsigned int epochs, double learning_rate);
 
+        int predict(std::vector<double>& inputs);
         
     private:
         unsigned int input_size_;
         unsigned int layer_count_;
         std::vector<Layer> layers_;
 
-        std::vector<float> propogate(std::vector<float>& inputs);
+        std::vector<double> propogate(std::vector<double>& inputs);
 
-        void back_propogate(std::vector<float>& inputs, std::vector<float>& labels, float learning_rate);
+        void back_propogate(std::vector<double>& labels);
+
+        void optimize_weights(std::vector<double>& inputs, double learning_rate);
 };
 
 

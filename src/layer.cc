@@ -12,8 +12,8 @@ unsigned int Layer::get_neuron_count(){
     return this->neuron_count_;
 }
 
-std::vector<float> Layer::propogate(const std::vector<float>& inputs){
-    std::vector<float> outputs;
+std::vector<double> Layer::propogate(const std::vector<double>& inputs){
+    std::vector<double> outputs;
     outputs.reserve(this->neuron_count_);
 
     for(int i = 0; i < this->neuron_count_; i++){
@@ -24,12 +24,12 @@ std::vector<float> Layer::propogate(const std::vector<float>& inputs){
 }
 
 //takes expected values
-std::vector<float> Layer::back_propogate_output(std::vector<float>& inputs){
-    std::vector<float> outputs;
+std::vector<double> Layer::back_propogate_output(std::vector<double>& inputs){
+    std::vector<double> outputs;
     outputs.reserve(this->neuron_count_);
 
     for (int i = 0; i < this->neuron_count_; i++){
-        float output = this->cost_function_derivative(this->neurons_[i].get_output(), inputs[i]) * this->activation_function_derivative(this->neurons_[i].get_weighted_sum());
+        double output = this->cost_function_derivative(this->neurons_[i].get_output(), inputs[i]) * this->activation_function_derivative(this->neurons_[i].get_weighted_sum());
         outputs.push_back(output);
         this->neurons_[i].update_nodeVal(output);
         // std::cout << "Weighted: " << this->neurons_[i].get_weighted_sum() << " " << this->neurons_[i].get_output() << " " << output << " " << outputs[i] << std::endl;
@@ -40,14 +40,14 @@ std::vector<float> Layer::back_propogate_output(std::vector<float>& inputs){
     return outputs;
 }
 
-std::vector<float> Layer::back_propogate_hidden(Layer &prev_layer, std::vector<float>& inputs){
-    std::vector<float> outputs;
+std::vector<double> Layer::back_propogate_hidden(Layer &prev_layer, std::vector<double>& inputs){
+    std::vector<double> outputs;
     outputs.reserve(this->neuron_count_);
 
     for (int i = 0; i < this->neuron_count_; i++){
-        float output = 0.0f;
+        double output = 0.0f;
         for (int j = 0; j < inputs.size(); j++){
-            float weighted = prev_layer.neurons_[j].get_weight_value(j);
+            double weighted = prev_layer.neurons_[j].get_weight_value(j);
             output += inputs[j] * weighted;
         }
         output *= this->activation_function_derivative(this->neurons_[i].get_weighted_sum());
@@ -58,8 +58,8 @@ std::vector<float> Layer::back_propogate_hidden(Layer &prev_layer, std::vector<f
     return outputs;
 }
 
-std::vector<float> Layer::gradient_descent(std::vector<float>& inputs, float learning_rate){
-    std::vector<float> outputs;
+std::vector<double> Layer::gradient_descent(std::vector<double>& inputs, double learning_rate){
+    std::vector<double> outputs;
 
     for (int i = 0; i < this->neuron_count_; i++){
         for(int j = 0; j < inputs.size(); j++){
@@ -74,8 +74,8 @@ std::vector<float> Layer::gradient_descent(std::vector<float>& inputs, float lea
     return outputs;
 }
 
-float Layer::get_cost(std::vector<float>& labels){
-    float cost = 0.0f;
+double Layer::get_cost(std::vector<double>& labels){
+    double cost = 0.0f;
 
     for(int i = 0; i < this->neuron_count_; i++){
         cost += (neurons_[i].get_output() - labels[i]) * (neurons_[i].get_output() - labels[i]);
@@ -84,7 +84,7 @@ float Layer::get_cost(std::vector<float>& labels){
     return cost;
 }
 
-float Layer::activation_function(float input){
+double Layer::activation_function(double input){
     //ReLU
     if(activation_function_ == 0){
         if(input < 0.0f){
@@ -98,7 +98,7 @@ float Layer::activation_function(float input){
     }
 }
 
-float Layer::activation_function_derivative(float input){
+double Layer::activation_function_derivative(double input){
     if(activation_function_ == 0){
         //ReLU
         if(input < 0.0f){
@@ -108,17 +108,17 @@ float Layer::activation_function_derivative(float input){
     }
     else {
         //Sigmoid
-        float activation = activation_function(input);
+        double activation = activation_function(input);
         return activation * (1.0f - activation);
     }
     
 }
 
-float Layer::cost_function(float output, float expected_output){
+double Layer::cost_function(double output, double expected_output){
     return (output-expected_output) * (output-expected_output);
 }
 
-float Layer::cost_function_derivative(float output, float expected_output){
+double Layer::cost_function_derivative(double output, double expected_output){
     return 2 * (output - expected_output);
 }
 

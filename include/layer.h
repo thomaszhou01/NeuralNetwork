@@ -11,15 +11,15 @@ class Layer{
 
         unsigned int get_neuron_count();
 
-        std::vector<float> propogate(const std::vector<float>& inputs);
+        std::vector<double> propogate(const std::vector<double>& inputs);
 
-        std::vector<float> back_propogate_output(std::vector<float>& inputs);
+        std::vector<double> back_propogate_output(std::vector<double>& inputs);
 
-        std::vector<float> back_propogate_hidden(Layer &prev_layer, std::vector<float>& inputs);
+        std::vector<double> back_propogate_hidden(Layer &prev_layer, std::vector<double>& inputs);
 
-        std::vector<float> gradient_descent(std::vector<float>& inputs, float learning_rate);
+        std::vector<double> gradient_descent(std::vector<double>& inputs, double learning_rate);
 
-        float get_cost(std::vector<float>& labels);
+        double get_cost(std::vector<double>& labels);
     
     private:
         unsigned int input_size_;
@@ -28,13 +28,13 @@ class Layer{
         
         std::vector<Neuron> neurons_;
 
-        float activation_function(float input);
+        double activation_function(double input);
 
-        float activation_function_derivative(float input);
+        double activation_function_derivative(double input);
 
-        float cost_function(float output, float expected_output);
+        double cost_function(double output, double expected_output);
 
-        float cost_function_derivative(float output, float expected_output);
+        double cost_function_derivative(double output, double expected_output);
 };
 
 
