@@ -39,7 +39,7 @@ int main(){
     NeuralNetwork nn{784};
     nn.add_layer(100, 0);
     nn.add_layer(10, 1);
-    nn.train(inputs, labels, 6, 0.075);
+    nn.train(inputs, labels, 6, 0.055, 1);
 
     std::ifstream test;
     test.open ("../data/mnist_test.csv");

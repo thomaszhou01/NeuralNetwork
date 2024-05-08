@@ -17,7 +17,9 @@ class Layer{
 
         std::vector<double> back_propogate_hidden(Layer &prev_layer, std::vector<double>& inputs);
 
-        std::vector<double> gradient_descent(std::vector<double>& inputs, double learning_rate);
+        std::vector<double> update_gradients(std::vector<double>& inputs);
+
+        std::vector<double> gradient_descent(double learning_rate);
 
         double get_cost(std::vector<double>& labels);
     
@@ -27,6 +29,7 @@ class Layer{
         unsigned int activation_function_;
         
         std::vector<Neuron> neurons_;
+        std::vector<double> nodeValues_;
 
         double activation_function(double input);
 

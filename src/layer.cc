@@ -2,6 +2,7 @@
 
 Layer::Layer(unsigned int neuron_count, unsigned int input_size, unsigned int activation_function): input_size_(input_size), neuron_count_(neuron_count), activation_function_(activation_function){
     this->neurons_.reserve(neuron_count);
+    nodeValues_.reserve(neuron_count);
 
     for(int i = 0; i < neuron_count; i++){
         this->neurons_.push_back(Neuron(input_size, activation_function));
@@ -32,6 +33,7 @@ std::vector<double> Layer::back_propogate_output(std::vector<double>& inputs){
         double output = this->cost_function_derivative(this->neurons_[i].get_output(), inputs[i]) * this->activation_function_derivative(this->neurons_[i].get_weighted_sum());
         outputs.push_back(output);
         this->neurons_[i].update_nodeVal(output);
+        this->nodeValues_[i] = output;
         // std::cout << "Weighted: " << this->neurons_[i].get_weighted_sum() << " " << this->neurons_[i].get_output() << " " << output << " " << outputs[i] << std::endl;
     }
 
@@ -53,17 +55,33 @@ std::vector<double> Layer::back_propogate_hidden(Layer &prev_layer, std::vector<
         output *= this->activation_function_derivative(this->neurons_[i].get_weighted_sum());
         outputs.push_back(output);
         this->neurons_[i].update_nodeVal(output);
+        this->nodeValues_[i] = output;
     }
 
     return outputs;
 }
 
-std::vector<double> Layer::gradient_descent(std::vector<double>& inputs, double learning_rate){
+std::vector<double> Layer::update_gradients(std::vector<double>& inputs){
     std::vector<double> outputs;
 
     for (int i = 0; i < this->neuron_count_; i++){
         for(int j = 0; j < inputs.size(); j++){
-            this->neurons_[i].update_weights(j, inputs[j], learning_rate);
+            this->neurons_[i].update_gradient_weights(j, inputs[j]);
+        }
+        
+        this->neurons_[i].update_gradient_bias();
+        outputs.push_back(this->neurons_[i].get_output());
+    }
+
+    return outputs;
+}
+
+std::vector<double> Layer::gradient_descent(double learning_rate){
+    std::vector<double> outputs;
+
+    for (int i = 0; i < this->neuron_count_; i++){
+        for(int j = 0; j < this->neurons_[i].get_input_size(); j++){
+            this->neurons_[i].update_weights(j, learning_rate);
         }
 
         this->neurons_[i].update_bias(learning_rate);

@@ -18,13 +18,17 @@ class Neuron {
 
         double get_weight_value(unsigned int weight);
 
+        void update_gradient_weights(unsigned int weight, double input);
+
+        void update_gradient_bias();
+
         void reset_nodeVal();
 
         double propogate(const std::vector<double>& inputs);
 
         void update_nodeVal(double nodeVal);
 
-        void update_weights(unsigned int weight, double input, double learning_rate);
+        void update_weights(unsigned int weight, double learning_rate);
 
         void update_bias(double learning_rate);
 
@@ -36,6 +40,9 @@ class Neuron {
         unsigned int activation_function_;
         //need gradient for weights and biases
         double nodeVal_;
+
+        std::vector<double> gradient_weights_;
+        double gradient_bias_;
 
         unsigned int input_size_;
         std::vector<double> weights_;

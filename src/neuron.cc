@@ -11,6 +11,7 @@ Neuron::Neuron(unsigned int input_size, unsigned int activation_function): input
 
     for(int i = 0; i < this->input_size_; i++){
         this->weights_.push_back(((double)rand() / (double)RAND_MAX) * 2 - 1);
+        this->gradient_weights_.emplace_back(0.0f);
     }
 }
 
@@ -28,6 +29,14 @@ double Neuron::get_weighted_sum(){
 
 double Neuron::get_weight_value(unsigned int weight){
     return this->weights_[weight];
+}
+
+void Neuron::update_gradient_weights(unsigned int weight, double input){
+    this->gradient_weights_[weight] += input * this->nodeVal_;
+}
+
+void Neuron::update_gradient_bias(){
+    this->gradient_bias_ += this->nodeVal_;
 }
 
 void Neuron::reset_nodeVal(){
@@ -54,12 +63,14 @@ void Neuron::update_nodeVal(double nodeVal){
     nodeVal_ += nodeVal;
 }
 
-void Neuron::update_weights(unsigned int weight, double input, double learning_rate){
-    this->weights_[weight] -= learning_rate * nodeVal_ * input;
+void Neuron::update_weights(unsigned int weight, double learning_rate){
+    this->weights_[weight] -= learning_rate * this->gradient_weights_[weight];
+    this->gradient_weights_[weight] = 0;
 }
 
 void Neuron::update_bias(double learning_rate){
-    bias_ -= learning_rate * nodeVal_;
+    bias_ -= learning_rate * this->gradient_bias_;
+    this->gradient_bias_ = 0;
 }
 
 

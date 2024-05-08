@@ -18,7 +18,7 @@ void NeuralNetwork::add_layer(unsigned int neuron_count, unsigned int activation
     std::cout << "Layer Added!" << std::endl;
 }  
 
-void NeuralNetwork::train(std::vector<std::vector<double>>& inputs, std::vector<std::vector<double>>& labels, unsigned int epochs, double learning_rate){
+void NeuralNetwork::train(std::vector<std::vector<double>>& inputs, std::vector<std::vector<double>>& labels, unsigned int epochs, double learning_rate, unsigned int batch_size){
     std::cout << "Training Started" << std::endl;
 
     for(int i = 0; i < epochs; i++){
@@ -31,8 +31,11 @@ void NeuralNetwork::train(std::vector<std::vector<double>>& inputs, std::vector<
             
             double iteration_cost = this->layers_[this->layer_count_-1].get_cost(labels[j]);
             // this->back_propogate(outputs, labels[j], learning_rate);
-            this->back_propogate(labels[j]);
-            this->optimize_weights(inputs[j], learning_rate);
+            this->back_propogate(labels[j], inputs[j]);
+            
+            if((j+1) % batch_size == 0){
+                this->optimize_weights(learning_rate);
+            }
 
             cost += iteration_cost;
         }
@@ -70,7 +73,7 @@ std::vector<double> NeuralNetwork::propogate(std::vector<double>& inputs){
     return outputs;
 }
 
-void NeuralNetwork::back_propogate(std::vector<double>& labels){
+void NeuralNetwork::back_propogate(std::vector<double>& labels, std::vector<double>& inputs){
     std::vector<double> outputs = labels;
 
     outputs = this->layers_[this->layer_count_-1].back_propogate_output(outputs);
@@ -78,12 +81,16 @@ void NeuralNetwork::back_propogate(std::vector<double>& labels){
     for(int i = this->layer_count_ - 2; i >= 0; i--){
         outputs = this->layers_[i].back_propogate_hidden(this->layers_[i+1], outputs);
     }
+    
+    std::vector<double> inputGradient = inputs;
+    for(int i = 0; i < this->layer_count_; i++){
+        inputGradient = this->layers_[i].update_gradients(inputGradient);
+    }
 }
 
-void NeuralNetwork::optimize_weights(std::vector<double>& inputs, double learning_rate){
-    std::vector<double> outputs = inputs;
+void NeuralNetwork::optimize_weights(double learning_rate){
     
     for(int i = 0; i < this->layer_count_; i++){
-        outputs = this->layers_[i].gradient_descent(outputs, learning_rate);
+        this->layers_[i].gradient_descent(learning_rate);
     }
 }
